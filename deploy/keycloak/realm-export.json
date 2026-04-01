@@ -1,0 +1,49 @@
+{
+  "realm": "webgen",
+  "enabled": true,
+
+  "clients": [
+    {
+      "clientId": "webgen-spa",
+      "name": "webgen-spa",
+      "enabled": true,
+
+      "publicClient": true,
+      "protocol": "openid-connect",
+
+      "redirectUris": [
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000"
+      ],
+
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Test",
+      "lastName": "User",
+      "email": "test@webgen.dev",
+
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test123",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}
