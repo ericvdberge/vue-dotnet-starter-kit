@@ -51,19 +51,19 @@ docker-compose up --build
 
 This brings up:
 
--   🌐 Frontend (Vue)\
--   🧠 Backend API (.NET)\
+-   🌐 Frontend (Vue)
+-   🧠 Backend API (.NET)
 -   🔐 Keycloak
 
 ------------------------------------------------------------------------
 
 ### 🌍 Services Overview
 
-  Service    URL
-  ---------- ------------------------
-  Frontend   http://localhost:3000
-  API        https://localhost:5001
-  Keycloak   http://localhost:8080
+| Service  | URL                     |
+|----------|--------------------------|
+| Frontend | http://localhost:3000    |
+| API      | https://localhost:5001   |
+| Keycloak | http://localhost:8080    |
 
 ------------------------------------------------------------------------
 
