@@ -5,12 +5,12 @@ export const useNavigationItems = () => {
         {
             title: 'Dashboard',
             icon: Home,
-            to: '/'
+            to: '/dashboard'
         },
         {
             title: 'Projects',
             icon: Folder, 
-            to: '/projects'
+            to: '/dashboard/projects'
         }
     ]
 }

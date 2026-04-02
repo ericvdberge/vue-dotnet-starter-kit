@@ -29,7 +29,12 @@
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarMenuButton size="lg" @click="logOut">
+          <LogOut class="size-4" />
+          Logout        
+        </SidebarMenuButton>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
 </template>
@@ -43,16 +48,19 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarInset,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarProvider,
   SidebarRail,
-  SidebarTrigger,
 } from '@/components/ui/sidebar'
 import { useNavigationItems } from '@/composables/useNavigationItems';
 import { RouterLink } from 'vue-router';
+import { LogOut } from 'lucide-vue-next';
+import keycloak from '@/auth/keycloak';
 
 const navigationItems = useNavigationItems();
+
+const logOut = () => {
+  keycloak.logout();
+}
 </script>
