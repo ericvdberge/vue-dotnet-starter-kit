@@ -14,3 +14,4 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
     volumes:
       - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm.json
+      - ./keycloak/themes:/opt/keycloak/themes
