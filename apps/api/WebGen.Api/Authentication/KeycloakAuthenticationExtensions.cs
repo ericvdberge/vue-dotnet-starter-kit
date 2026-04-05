@@ -25,6 +25,7 @@ public static class KeycloakAuthenticationExtensions
                 $"Keycloak configuration section '{sectionName}' not found or invalid in appsettings.json");
 
         var authority = $"{options.Authority}/realms/{options.Realm}";
+        var validIssuer = $"{options.ValidIssuer}/realms/{options.Realm}";
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(config =>
@@ -37,11 +38,7 @@ public static class KeycloakAuthenticationExtensions
                 config.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuers = new[]
-                    {
-                        authority,
-                        authority.Replace("keycloak", "localhost")
-                    },
+                    ValidIssuer = validIssuer,
                     ValidateAudience = true,
                     ValidAudience = options.ClientId,
                     ValidateLifetime = true,

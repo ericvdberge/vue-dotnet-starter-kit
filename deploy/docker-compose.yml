@@ -12,6 +12,8 @@ services:
       - "5001:8080"
     depends_on:
       - keycloak
+    env_file:
+      - ../apps/api/WebGen.Api/.env.docker-compose
   
   keycloak:
     image: quay.io/keycloak/keycloak:latest
