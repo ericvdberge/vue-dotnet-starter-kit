@@ -27,6 +27,51 @@
 
       "attributes": {
         "pkce.code.challenge.method": "S256"
+      },
+
+      "protocolMappers": [
+        {
+          "name": "web-api token exchange",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "webgen-api",
+            "introspection.token.claim": "false",
+            "add.to.id.token": "false",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "add.to.access.token": "true",
+            "access.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "webgen-api",
+      "name": "webgen-api",
+      "enabled": true,
+
+      "publicClient": false,
+      "protocol": "openid-connect",
+      "clientAuthenticatorType": "client-secret",
+      "serviceAccountsEnabled": true,
+
+      "redirectUris": [
+        "http://localhost:5173/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:5173",
+        "http://localhost:3000"
+      ],
+
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
       }
     }
   ],
