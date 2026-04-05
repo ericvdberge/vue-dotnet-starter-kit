@@ -26,13 +26,14 @@ public static class KeycloakAuthenticationExtensions
 
         var authority = $"{options.Authority}/realms/{options.Realm}";
         var validIssuer = $"{options.ValidIssuer}/realms/{options.Realm}";
+        var metadataAddress = $"{options.Authority}/realms/{options.Realm}/.well-known/openid-configuration";
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(config =>
             {
                 config.Authority = authority;
                 config.Audience = options.ClientId;
-                config.MetadataAddress = $"{options.Authority}/realms/{options.Realm}/.well-known/openid-configuration";
+                config.MetadataAddress = metadataAddress;
                 config.RequireHttpsMetadata = !options.Authority.StartsWith("http://");
 
                 config.TokenValidationParameters = new TokenValidationParameters

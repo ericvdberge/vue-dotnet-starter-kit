@@ -4,19 +4,22 @@ using WebGen.Api.Cors;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddPermissiveCors()
+    .AddSecureCors(builder.Configuration)
     .AddKeycloakAuthentication(builder.Configuration)
     .AddAuthorization()
     .AddOpenApi();
 
 var app = builder.Build();
 
-app.UseCors("AllowAll");
+app.UseCors("SecureUrls");
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapOpenApi();
+
+#if !DEBUG
 //app.UseHttpsRedirection();
+#endif
 
 // Public endpoint
 app.MapGet("/", () => "API running");
@@ -25,4 +28,4 @@ app.MapGet("/", () => "API running");
 app.MapGet("/secure", () => "You are authenticated!")
     .RequireAuthorization();
 
-app.Run();
+await app.RunAsync();

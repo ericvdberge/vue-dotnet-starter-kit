@@ -1,27 +1,38 @@
 namespace WebGen.Api.Cors;
 
+using System;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 /// <summary>
-/// Extension methods for adding permissive CORS to the service collection.
+/// Extension methods for adding CORS to the service collection.
 /// </summary>
 public static class CorsExtensions
 {
     /// <summary>
-    /// Adds a permissive CORS policy that allows all origins, methods, and headers.
-    /// WARNING: Only use in development. Do not use in production without restricting origins.
+    /// Adds a secure CORS policy that only allows origins configured in the "Cors:FrontendUrls" configuration
+    /// section. This can be overridden by environment variables (e.g. "Cors__FrontendUrls__0").
     /// </summary>
     /// <param name="services">The service collection.</param>
-    /// <param name="policyName">The CORS policy name (default: "AllowAll").</param>
+    /// <param name="configuration">The application configuration.</param>
+    /// <param name="policyName">The CORS policy name (default: "AllowFrontend").</param>
     /// <returns>The service collection for chaining.</returns>
-    public static IServiceCollection AddPermissiveCors(
+    public static IServiceCollection AddSecureCors(
         this IServiceCollection services,
-        string policyName = "AllowAll")
+        IConfiguration configuration,
+        string policyName = "SecureUrls")
     {
+        var origins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
+
+        if (origins.Length == 0)
+            throw new InvalidOperationException("No frontend URLs configured for CORS. Please configure 'Cors:AllowedOrigins' in configuration or set environment variables (e.g. 'Cors__AllowedOrigins__0').");
+
         services.AddCors(options =>
         {
             options.AddPolicy(policyName, builder =>
             {
                 builder
-                    .AllowAnyOrigin()
+                    .WithOrigins(origins)
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             });
