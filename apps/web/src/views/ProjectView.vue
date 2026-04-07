@@ -1,19 +1,18 @@
 <script setup lang="ts">
+import { useSecureKeys } from '@/composables/useSecureKeys';
 import DashboardLayout from '@/layouts/DashboardLayout.vue';
-import { useAuth } from '@/composables/useAuth';
-const { getToken } = useAuth();
 
-const data = await fetch('http://localhost:5001/secure', {
-    headers: {
-        Authorization: `Bearer ${getToken()}`
-    }
-}).then(res => res.text());
+const { data: secureKeys, isLoading } = useSecureKeys();
 
 </script>
 
 <template>
     <DashboardLayout>
         <h1 class="text-2xl font-bold">Project View</h1>
-        <p>{{ data }}</p>
+        <ul v-if="!isLoading">
+            <li v-for="value in secureKeys" :key="value">
+                {{ value }}
+            </li>
+        </ul>
     </DashboardLayout>
 </template>

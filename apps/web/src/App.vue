@@ -12,4 +12,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { Suspense } from 'vue';
+import { useSecureClient } from './composables/useSecureClient';
+
+useSecureClient();
 </script>
