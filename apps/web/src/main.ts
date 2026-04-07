@@ -5,6 +5,8 @@ import '@/assets/style.css'
 import { useAuth } from './composables/useAuth'
 import keycloak from '@/auth/keycloak'
 
+import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query';
+
 router.beforeEach(async (to) => {
   const { isAuthenticated, init } = useAuth()
 
@@ -21,4 +23,15 @@ router.beforeEach(async (to) => {
   return true
 })
 
-createApp(App).use(router).mount('#app')
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime:  1000 * 60 * 10, // 10 minutes
+    },
+  },
+})
+
+createApp(App)
+  .use(router)
+  .use(VueQueryPlugin, { queryClient })
+  .mount('#app')

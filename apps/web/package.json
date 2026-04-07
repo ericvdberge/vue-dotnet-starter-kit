@@ -8,13 +8,16 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build"
+    "type-check": "vue-tsc --build",
+    "gen-api": "npx @hey-api/openapi-ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "@tanstack/vue-query": "^5.96.2",
     "@vueuse/core": "^14.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.4.1",
     "keycloak-js": "^26.2.3",
     "lucide-vue-next": "^1.0.0",
     "reka-ui": "^2.9.2",
@@ -24,6 +27,7 @@
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "^0.95.0",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "^24.12.0",
     "@vitejs/plugin-vue": "^6.0.4",

@@ -5,6 +5,15 @@ services:
       - "3000:80"
     depends_on:
       - keycloak
+
+  api:
+    build: ../apps/api/WebGen.Api
+    ports:
+      - "5001:8080"
+    depends_on:
+      - keycloak
+    env_file:
+      - ../apps/api/WebGen.Api/.env.docker-compose
   
   keycloak:
     image: quay.io/keycloak/keycloak:latest
@@ -12,8 +21,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
     volumes:
       - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm.json
       - ./keycloak/themes:/opt/keycloak/themes
