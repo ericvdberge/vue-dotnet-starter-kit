@@ -80,6 +80,10 @@
         </span>
         <button class="border px-3 py-1.5 rounded-md text-sm">+ Assign</button>
         </div>
+
+        <Button @click="showToast">
+          Show Toast
+        </button>
     </div>
     </div>
 </div>
@@ -87,6 +91,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { toast } from 'vue-sonner'
+import Button from '@/components/ui/button/Button.vue';
+
+const showToast = () => {
+  toast.success('This is a toast notification!', { position: 'bottom-right' });
+};
 
 const roles = ref(['Admin', 'Editor', 'Viewer']);
 const selectedRole = ref('Editor');

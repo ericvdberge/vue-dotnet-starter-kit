@@ -7,12 +7,15 @@
             </div>
         </template>
     </Suspense>
+    <Toaster />
 </template>
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { Suspense } from 'vue';
 import { useSecureClient } from './composables/useSecureClient';
+import 'vue-sonner/style.css'
+import { Toaster } from './components/ui/sonner';
 
 useSecureClient();
 </script>

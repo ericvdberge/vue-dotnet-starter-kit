@@ -13,33 +13,23 @@
         </div>
       </div>
 
-      <!-- Tabs -->
-      <div>
-        <div class="flex gap-6 border-b">
-          <button
-            v-for="tab in tabs"
-            :key="tab.name"
-            @click="setActiveTab(tab.name)"
-            :class="[
-              'pb-2 text-sm',
-              activeTab === tab.name
-                ? 'border-b-2 border-black font-medium'
-                : 'text-muted-foreground'
-            ]"
-          >
+      <Tabs v-if="tabs" :defaultValue="tabs[0]?.name">
+        <TabsList variant="line">
+          <TabsTrigger v-for="tab in tabs" :key="tab.name" :value="tab.name">
             {{ tab.name }}
-          </button>
-        </div>
-
-        <component :is="tabComponents[activeTab]" />
-        
-      </div>
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent v-for="tab in tabs" :key="tab.name" :value="tab.name">
+          <component :is="tab.component" />
+        </TabsContent>
+      </Tabs>
     </div>
   </DashboardLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, type Component } from 'vue';
+import { type Component } from 'vue';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import DashboardLayout from '@/layouts/DashboardLayout.vue';
 import RolesTab from './RolesTab.vue';
 import PermissionsTab from './PermissionsTab.vue';
@@ -49,24 +39,10 @@ interface Tab {
   name: string;
   component: Component; // Replace with actual component type
 }
-// const tabs = ['Roles', 'Permissions', 'Users', 'Templates'];
+
 const tabs: Tab[] = [
   { name: 'Roles', component: RolesTab},
   { name: 'Permissions', component: PermissionsTab },
-  { name: 'Users', component: UsersTab }  
+  { name: 'Users', component: UsersTab }
 ]
-const activeTab = ref<string>(tabs[0]!.name);
-
-const setActiveTab = (tabName: string) => {
-  const tab = tabs.find(t => t.name === tabName);
-  if (tab) activeTab.value = tab.name;
-};
-
-const tabComponents = computed(() => {
-  const mapping: Record<string, Component> = {};
-  tabs.forEach(tab => {
-    mapping[tab.name] = tab.component;
-  });
-  return mapping;
-});
 </script>
