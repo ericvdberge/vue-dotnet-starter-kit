@@ -7,7 +7,7 @@
                 <SidebarTrigger class="-ml-1" />
                 </div>
             </header>
-            <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
+            <div class="flex flex-1 flex-col gap-4 p-6 pt-0">
                 <slot />
             </div>
         </SidebarInset>

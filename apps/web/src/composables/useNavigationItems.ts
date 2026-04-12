@@ -1,4 +1,4 @@
-import { Home, Folder } from "lucide-vue-next"
+import { Home, Folder, Lock } from "lucide-vue-next"
 
 export const useNavigationItems = () => {
     return [
@@ -11,6 +11,11 @@ export const useNavigationItems = () => {
             title: 'Projects',
             icon: Folder, 
             to: '/dashboard/projects'
+        },
+        {
+            title: 'Access Control',
+            icon: Lock,
+            to: '/dashboard/access-control'
         }
     ]
 }

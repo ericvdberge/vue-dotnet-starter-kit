@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import DashboardView from '@/views/DashboardView.vue';
-import ProjectView from '@/views/ProjectView.vue';
     
 const routes = [
-    { path: '/dashboard', name: 'Home', component: DashboardView },
-    { path: '/dashboard/projects', name: 'Projects', component: ProjectView },
+    { path: '/dashboard', name: 'Home', component: () => import('@/views/DashboardView.vue') },
+    { path: '/dashboard/projects', name: 'Projects', component: () => import('@/views/ProjectView.vue') },
+    { path: '/dashboard/access-control', name: 'AccessControl', component: () => import('@/views/AccessControl/AccessControlView.vue') },
     { path: '/:pathMatch(.*)*', redirect: '/dashboard' },
 ]
 
