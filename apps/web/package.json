@@ -9,11 +9,13 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "gen-api": "npx @hey-api/openapi-ts"
+    "gen-api": "npx @hey-api/openapi-ts",
+    "add:ui": "pnpm dlx shadcn-vue@latest add"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
     "@tanstack/vue-query": "^5.96.2",
+    "@tanstack/vue-table": "^8.21.3",
     "@vueuse/core": "^14.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

@@ -7,10 +7,6 @@
           <h1 class="text-2xl font-bold">Access Control</h1>
           <p class="text-sm text-muted-foreground">Manage roles and permissions</p>
         </div>
-        <div class="flex gap-2">
-          <button class="border px-3 py-1.5 rounded-md text-sm">Apply Template</button>
-          <button class="bg-black text-white px-3 py-1.5 rounded-md text-sm">Create Role</button>
-        </div>
       </div>
 
       <Tabs v-if="tabs" :defaultValue="tabs[0]?.name">
@@ -31,7 +27,7 @@
 import { type Component } from 'vue';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import DashboardLayout from '@/layouts/DashboardLayout.vue';
-import RolesTab from './RolesTab.vue';
+import RolesTab from './RolesTab/RolesTab.vue';
 import PermissionsTab from './PermissionsTab.vue';
 import UsersTab from './UsersTab.vue';
 
