@@ -14,4 +14,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Webgen.Application\Webgen.Application.csproj" />
+    <ProjectReference Include="..\Webgen.Infrastructure\Webgen.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

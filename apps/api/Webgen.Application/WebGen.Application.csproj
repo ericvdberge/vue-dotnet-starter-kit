@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebGen.Domain\WebGen.Domain.csproj" />
+    <ProjectReference Include="..\Webgen.Infrastructure\Webgen.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public static class CorsExtensions
 {
+
+    public const string SECURE_CORS = "SecureUrls";
     /// <summary>
     /// Adds a secure CORS policy that only allows origins configured in the "Cors:FrontendUrls" configuration
     /// section. This can be overridden by environment variables (e.g. "Cors__FrontendUrls__0").
@@ -20,7 +22,7 @@ public static class CorsExtensions
     public static IServiceCollection AddSecureCors(
         this IServiceCollection services,
         IConfiguration configuration,
-        string policyName = "SecureUrls")
+        string policyName = SECURE_CORS)
     {
         var origins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? [];
 
