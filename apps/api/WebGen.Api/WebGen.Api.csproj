@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Webgen.Application\Webgen.Application.csproj" />
-    <ProjectReference Include="..\Webgen.Infrastructure\Webgen.Infrastructure.csproj" />
+    <ProjectReference Include="..\Webgen.Application\WebGen.Application.csproj" />
+    <ProjectReference Include="..\Webgen.Infrastructure\WebGen.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

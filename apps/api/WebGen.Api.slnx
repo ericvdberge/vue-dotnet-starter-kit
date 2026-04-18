@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="WebGen.Api/WebGen.Api.csproj" />
-  <Project Path="Webgen.Application/Webgen.Application.csproj" Id="6023e4b2-8e2f-45d7-b7c0-e0f1b4419884" />
+  <Project Path="Webgen.Application/WebGen.Application.csproj" Id="6023e4b2-8e2f-45d7-b7c0-e0f1b4419884" />
   <Project Path="WebGen.Domain/WebGen.Domain.csproj" Id="95f5459c-60f7-4c3e-93a6-61f0350dc5b5" />
-  <Project Path="Webgen.Infrastructure/Webgen.Infrastructure.csproj" Id="88fa6943-4a47-44f8-ba7e-b9ecc9c84faf" />
+  <Project Path="Webgen.Infrastructure/WebGen.Infrastructure.csproj" Id="88fa6943-4a47-44f8-ba7e-b9ecc9c84faf" />
 </Solution>

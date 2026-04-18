@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebGen.Domain\WebGen.Domain.csproj" />
-    <ProjectReference Include="..\Webgen.Infrastructure\Webgen.Infrastructure.csproj" />
+    <ProjectReference Include="..\Webgen.Infrastructure\WebGen.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
