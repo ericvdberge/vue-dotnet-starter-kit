@@ -145,7 +145,7 @@ function toggleGroup(perms: Permission[], checked: boolean) {
             <Checkbox
               :checked="isGroupChecked(perms)"
               :indeterminate="isGroupIndeterminate(perms)"
-              @update:checked="val => toggleGroup(perms, !!val)"
+              @update:checked="(val: boolean) => toggleGroup(perms, !!val)"
               class="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
             />
           </div>
@@ -165,6 +165,7 @@ function toggleGroup(perms: Permission[], checked: boolean) {
 
               <Checkbox
                 :checked="isChecked(perm.key)"
+                @update:checked="(val: boolean) => togglePermission(perm.key, !!val)"
                 class="data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground"
               />
             </div>
