@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import AppSidebar from '@/components/layout/AppSidebar.vue';
+import AppSidebar from '../components/AppSidebar.vue'
 import SidebarProvider from '@/components/ui/sidebar/SidebarProvider.vue';
 import SidebarInset from '@/components/ui/sidebar/SidebarInset.vue';
 import SidebarTrigger from '@/components/ui/sidebar/SidebarTrigger.vue';

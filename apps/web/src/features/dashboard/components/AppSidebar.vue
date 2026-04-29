@@ -53,7 +53,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
-import { useNavigationItems } from '@/composables/useNavigationItems';
+import { useNavigationItems } from '../composables/useNavigationItems';
 import { RouterLink } from 'vue-router';
 import { LogOut } from 'lucide-vue-next';
 import keycloak from '@/auth/keycloak';
