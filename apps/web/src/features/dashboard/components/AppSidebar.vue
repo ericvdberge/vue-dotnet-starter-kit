@@ -13,11 +13,11 @@
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <SidebarGroup v-for="navigationGroup in navigationItems" :key="navigationGroup.title">
+          <SidebarGroupLabel>{{ navigationGroup.title }}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem v-for="navigationItem in navigationItems" :key="navigationItem.title">
+              <SidebarMenuItem v-for="navigationItem in navigationGroup.items" :key="navigationItem.title">
                 <SidebarMenuButton as-child>
                   <RouterLink :to="navigationItem.to">
                     <component :is="navigationItem.icon" class="size-4" />

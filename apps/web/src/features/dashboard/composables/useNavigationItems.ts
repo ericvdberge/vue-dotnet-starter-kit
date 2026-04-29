@@ -1,21 +1,27 @@
-import { Home, Folder, Lock } from "lucide-vue-next"
+import { Home, Lock } from "lucide-vue-next"
+import type { NavigationGroup } from "../types/navigation-items"
 
-export const useNavigationItems = () => {
+export const useNavigationItems: () => NavigationGroup[] = () => {
     return [
         {
-            title: 'Dashboard',
-            icon: Home,
-            to: '/dashboard'
+            title: 'Main',
+            items: [
+                {
+                    title: 'Home',
+                    icon: Home,
+                    to: '/dashboard'
+                }
+            ]
         },
         {
-            title: 'Projects',
-            icon: Folder, 
-            to: '/dashboard/projects'
-        },
-        {
-            title: 'Access Control',
-            icon: Lock,
-            to: '/dashboard/access-control'
+            title: 'Management',
+            items: [
+                {
+                    title: 'Access Control',
+                    icon: Lock,
+                    to: '/dashboard/access-control'
+                }
+            ]
         }
     ]
 }
