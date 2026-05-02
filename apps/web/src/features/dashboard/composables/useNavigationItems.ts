@@ -1,8 +1,12 @@
 import { Home, Lock } from "lucide-vue-next"
 import type { NavigationGroup } from "../types/navigation-items"
 
-export const useNavigationItems: () => NavigationGroup[] = () => {
-    return [
+interface UseNavigationItems {  
+    groups: NavigationGroup[]
+}
+
+export const useNavigationItems: () => UseNavigationItems = () => {
+    const groups = [
         {
             title: 'Main',
             items: [
@@ -24,4 +28,7 @@ export const useNavigationItems: () => NavigationGroup[] = () => {
             ]
         }
     ]
+    return {
+        groups
+    }
 }

@@ -6,7 +6,7 @@ services:
     depends_on:
       - keycloak
     env_file:
-      - ../apps/web/.env.development
+      - ../apps/web/.env
 
   api:
     build: ../apps/api/WebGen.Api

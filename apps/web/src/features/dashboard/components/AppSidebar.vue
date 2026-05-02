@@ -13,7 +13,7 @@
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup v-for="navigationGroup in navigationItems" :key="navigationGroup.title">
+        <SidebarGroup v-for="navigationGroup in navigationItemGroups" :key="navigationGroup.title">
           <SidebarGroupLabel>{{ navigationGroup.title }}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -58,7 +58,7 @@ import { RouterLink } from 'vue-router';
 import { LogOut } from 'lucide-vue-next';
 import keycloak from '@/auth/keycloak';
 
-const navigationItems = useNavigationItems();
+const { groups: navigationItemGroups } = useNavigationItems();
 
 const logOut = () => {
   keycloak.logout();
