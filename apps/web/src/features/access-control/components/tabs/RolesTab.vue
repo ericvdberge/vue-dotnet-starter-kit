@@ -27,7 +27,7 @@ const handleRowClick = (row: Row<Role>) => {
 </script>
 
 <template>
-    <h1 class="text-2xl font-bold mt-6">Roles</h1>
+    <h1 class="text-lg font-bold mt-6">Roles</h1>
 
     <Table class="mt-5">
         <TableHeader>
