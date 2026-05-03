@@ -11,19 +11,22 @@ import { useRolesTable } from '../../composables/useRolesTable'
 import { FlexRender, type Row } from '@tanstack/vue-table';
 import type { Role } from '../../types/roles';
 import RolePermissionsDrawer from '../RolePermissionsDrawer.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { usePermissions } from '../../composables/usePermissions';
+
+const selectedRole = ref<Role | null>(null);
+const { query } = usePermissions(selectedRole);
+const permissionGroups = computed(() => query?.data.value || {});
 
 const { table } = useRolesTable()
 const openDrawer = ref(false);
 
 const handleRowClick = (row: Row<Role>) => {
-    // You can access the role data using row.original
-    const role = row.original;
-    console.log('Clicked role:', role);
-
-    // Open the permissions drawer
+    selectedRole.value = row.original
     openDrawer.value = !openDrawer.value;
 };
+
+
 </script>
 
 <template>
@@ -52,6 +55,8 @@ const handleRowClick = (row: Row<Role>) => {
 
     <RolePermissionsDrawer 
         :open="openDrawer" 
+        :role="selectedRole"
+        :permissionGroups="permissionGroups"
         @update:open="openDrawer = $event" 
     />
 </template>
