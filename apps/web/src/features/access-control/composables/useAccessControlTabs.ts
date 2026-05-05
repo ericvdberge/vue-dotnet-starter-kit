@@ -4,7 +4,7 @@ import type { AccessControlTab } from "../types/access-control-tabs";
 export const useAccessControlTabs = () => {
     
     const tabs: AccessControlTab[] = [
-        { value: 'roles', label: 'Roles', component: defineAsyncComponent(() => import('../components/tabs/RolesTab.vue')) },
+        { value: 'roles', label: 'Roles', component: defineAsyncComponent(() => import('../components/RolesTab/RolesTab.vue')) },
         { value: 'permissions', label: 'Permissions', component: defineAsyncComponent(() => import('../components/tabs/PermissionsTab.vue')) },
         { value: 'users', label: 'Users', component: defineAsyncComponent(() => import('../components/tabs/UsersTab.vue')) },
     ];

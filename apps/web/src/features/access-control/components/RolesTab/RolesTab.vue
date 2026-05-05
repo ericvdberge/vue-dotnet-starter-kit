@@ -10,15 +10,20 @@ import {
 import { useRolesTable } from '../../composables/useRolesTable'
 import { FlexRender, type Row } from '@tanstack/vue-table';
 import type { Role } from '../../types/roles';
-import RolePermissionsDrawer from '../RolePermissionsDrawer.vue';
+import RolePermissionsDrawer from './RolePermissionsDrawer.vue';
 import { computed, ref } from 'vue';
 import { usePermissions } from '../../composables/usePermissions';
+import type { AcceptableValue } from 'reka-ui';
+import { useRoles } from '../../composables/useRoles';
+import RoleFilters from './RoleFilters.vue';
 
 const selectedRole = ref<Role | null>(null);
-const { query } = usePermissions(selectedRole);
-const permissionGroups = computed(() => query?.data.value || {});
+const { permissionsQuery } = usePermissions(selectedRole);
+const permissionGroups = computed(() => permissionsQuery?.data.value || {});
 
-const { table } = useRolesTable()
+const { rolesQuery } = useRoles();
+const roles = computed(() => rolesQuery.data.value ?? []);
+const { table } = useRolesTable(roles);
 const openDrawer = ref(false);
 
 const handleRowClick = (row: Row<Role>) => {
@@ -32,6 +37,8 @@ const handleRowClick = (row: Row<Role>) => {
 <template>
     <h1 class="text-lg font-bold mt-6">Roles</h1>
 
+    <RoleFilters :roles="roles" :table="table" />
+
     <Table class="mt-5">
         <TableHeader>
             <TableRow v-for="headerGroup in table.getHeaderGroups()">
@@ -42,7 +49,7 @@ const handleRowClick = (row: Row<Role>) => {
         </TableHeader>
 
         <TableBody> 
-            <TableRow v-for="row in table.getRowModel().rows" @click="handleRowClick(row)">
+            <TableRow v-for="row in table.getFilteredRowModel().rows" @click="handleRowClick(row)" :key="row.id">
                 <TableCell v-for="cell in row.getVisibleCells()">
                     <FlexRender
                         :render="cell.column.columnDef.cell"

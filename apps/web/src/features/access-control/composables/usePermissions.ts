@@ -5,7 +5,7 @@ import type { Permission } from "../types/permissions";
 
 export const usePermissions = (role: Ref<Role | null>) => {  
     const queryClient = useQueryClient();
-    const query = useQuery({
+    const permissionsQuery = useQuery({
         queryKey: computed(() => ['permissions', role.value?.id]),
         queryFn: async () => {
             return buildPermissions(role.value?.id);
@@ -37,7 +37,7 @@ export const usePermissions = (role: Ref<Role | null>) => {
     })
 
     return {
-        query,
+        permissionsQuery,
         togglePermission
     }
 }
@@ -96,6 +96,6 @@ function buildPermissions(roleId?: number): { [key: string]: Permission[] } {
         description: "Allows viewing role information",
         enabled: true,
       },
-    ],
+    ]
   }
 }

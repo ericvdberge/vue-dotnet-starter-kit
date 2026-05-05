@@ -11,17 +11,17 @@ import {
     Card, 
     CardContent, 
     CardHeader, 
-    CardTitle 
+    CardTitle, 
 } from '@/components/ui/card';
 
 import { Checkbox } from '@/components/ui/checkbox';
 
 import { ChevronsLeftIcon } from 'lucide-vue-next';
-import type { Role } from '../types/roles';
-import type { Permission } from '../types/permissions';
+import type { Role } from '../../types/roles';
+import type { Permission } from '../../types/permissions';
 import Label from '@/components/ui/label/Label.vue';
 import { toRefs } from 'vue';
-import { usePermissions } from '../composables/usePermissions';
+import { usePermissions } from '../../composables/usePermissions';
 
 interface RolePermissionsDrawerProps {
   open: boolean,
@@ -62,7 +62,7 @@ const { togglePermission } = usePermissions(role);
                 <Card 
                     v-for="(permissions, group) in permissionGroups" 
                     :key="group" 
-                    class="flex-[1_1_300px] min-w-75 max-w-full border-none"
+                    class="flex-[1_1_300px] min-w-75 max-w-[33%] border-none"
                 >
                     <CardHeader>
                         <CardTitle>{{ group }}</CardTitle>
