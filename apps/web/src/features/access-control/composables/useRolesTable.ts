@@ -7,8 +7,6 @@ import type { Role } from "../types/roles"
 import { computed, ref, unref, type Ref } from "vue"
 
 export const useRolesTable = (roles: Ref<Role[]>) => {
-    const globalFilter = ref<string>('');
-    
     const columns = computed(() => {
         if (!roles.value.length) return [];
         return Object.keys(roles.value[0]!).map(key => ({
@@ -23,14 +21,6 @@ export const useRolesTable = (roles: Ref<Role[]>) => {
         },
         get columns() {
             return unref(columns);
-        },
-        state: {
-            get globalFilter() {
-                return globalFilter.value;
-            }
-        }, 
-        onGlobalFilterChange: (val) => {
-            globalFilter.value = val
         },
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(), // 🔥 REQUIRED
