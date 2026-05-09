@@ -32,6 +32,8 @@ const virtualRows = useVirtualizer({
 const virtualItems = computed(() =>
     virtualRows.value.getVirtualItems()
 );
+
+const totalSize = computed(() => table.getTotalSize());
 </script>
 
 <template>
@@ -40,9 +42,9 @@ const virtualItems = computed(() =>
     <!-- SCROLL CONTAINER -->
     <div
         ref="parentRef"
-        class="mt-5 max-h-[80vh] overflow-auto"
+        class="mt-5 max-h-112.5 overflow-auto w-full"
     >
-        <Table class="w-full">
+        <Table :style="{width: `${totalSize}px`}">
             <TableHeader>
                 <TableRow
                     v-for="headerGroup in table.getHeaderGroups()"
@@ -52,6 +54,10 @@ const virtualItems = computed(() =>
                     <TableHead
                         v-for="header in headerGroup.headers"
                         :key="header.id"
+                        :style="{
+                            minWidth: `${header.column.getSize()}px`,
+                            width: `${header.column.getSize()}px`,
+                        }"
                     >
                         {{ header.column.columnDef.header }}
                     </TableHead>
@@ -67,17 +73,21 @@ const virtualItems = computed(() =>
                 <TableRow
                     v-for="row in virtualItems"
                     :key="row.index"
+                    class="w-full"
                     :style="{
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        width: '100%',
                         transform: `translateY(${row.start}px)`,
                     }"
                 >
                     <TableCell
                         v-for="cell in rows[row.index]?.getVisibleCells()"
                         :key="cell.id"
+                        :style="{
+                            minWidth: `${cell.column.getSize()}px`,
+                            width: `${cell.column.getSize()}px`,
+                        }"
                     >
                         <FlexRender
                             :render="cell.column.columnDef.cell"
