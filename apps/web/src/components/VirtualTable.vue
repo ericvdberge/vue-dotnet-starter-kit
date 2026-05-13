@@ -41,27 +41,18 @@ const virtualRows = computed(() =>
 );
 
 const totalFixedWidth = computed(() => {
-    return columns.value
-        .slice(0, -1)
-        .reduce((acc, column) => {
-            return acc + column.getSize();
-        }, 0);
+    return columns.value.slice(0, -1).reduce((acc, column) => {
+        return acc + column.getSize();
+    }, 0);
 });
 
 const lastColumnWidth = computed(() => {
-    const containerWidth =
-        parentRef.value?.clientWidth ?? 0;
-
-    return Math.max(
-        minLastColumnWidth,
-        containerWidth - totalFixedWidth.value
-    );
+    const containerWidth = parentRef.value?.clientWidth ?? 0;
+    return Math.max(minLastColumnWidth, containerWidth - totalFixedWidth.value);
 });
 
 const getColumnStyle = (index: number, size: number) => {
-    const isLastColumn =
-        index === columns.value.length - 1;
-
+    const isLastColumn = index === columns.value.length - 1;
     if (isLastColumn) {
         return {
             flex: `1 1 ${lastColumnWidth.value}px`,
