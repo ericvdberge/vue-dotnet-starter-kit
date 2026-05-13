@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
 import { useRolesTable } from '../../composables/useRolesTable'
-import { FlexRender, type Row } from '@tanstack/vue-table';
 import type { Role } from '../../types/roles';
 import RolePermissionsDrawer from './RolePermissionsDrawer.vue';
 import { computed, ref } from 'vue';
 import { usePermissions } from '../../composables/usePermissions';
-import type { AcceptableValue } from 'reka-ui';
 import { useRoles } from '../../composables/useRoles';
 import RoleFilters from './RoleFilters.vue';
 import VirtualTable from '@/components/VirtualTable.vue';
