@@ -16,6 +16,7 @@ import { usePermissions } from '../../composables/usePermissions';
 import type { AcceptableValue } from 'reka-ui';
 import { useRoles } from '../../composables/useRoles';
 import RoleFilters from './RoleFilters.vue';
+import VirtualTable from '@/components/VirtualTable.vue';
 
 const selectedRole = ref<Role | null>(null);
 const { permissionsQuery } = usePermissions(selectedRole);
@@ -26,8 +27,8 @@ const roles = computed(() => rolesQuery.data.value ?? []);
 const { table } = useRolesTable(roles);
 const openDrawer = ref(false);
 
-const handleRowClick = (row: Row<Role>) => {
-    selectedRole.value = row.original
+const handleRowClick = (row: Role) => {
+    selectedRole.value = row;
     openDrawer.value = !openDrawer.value;
 };
 
@@ -39,26 +40,11 @@ const handleRowClick = (row: Row<Role>) => {
 
     <RoleFilters :roles="roles" :table="table" />
 
-    <Table class="mt-5">
-        <TableHeader>
-            <TableRow v-for="headerGroup in table.getHeaderGroups()">
-                <TableHead v-for="header in headerGroup.headers">
-                    {{ header.column.columnDef.header }}
-                </TableHead>
-            </TableRow>
-        </TableHeader>
-
-        <TableBody> 
-            <TableRow v-for="row in table.getFilteredRowModel().rows" @click="handleRowClick(row)" :key="row.id">
-                <TableCell v-for="cell in row.getVisibleCells()">
-                    <FlexRender
-                        :render="cell.column.columnDef.cell"
-                        :props="cell.getContext()"
-                    />
-                </TableCell>
-            </TableRow>
-        </TableBody>
-    </Table>
+    <VirtualTable
+        :table="table"
+        class="mt-5 h-full w-full" 
+        @row-click="handleRowClick"
+    />
 
     <RolePermissionsDrawer 
         :open="openDrawer" 
