@@ -32,7 +32,7 @@ const handleRowClick = (row: Role) => {
 
     <VirtualTable
         :table="table"
-        class="mt-5 h-full w-full" 
+        class="mt-5 h-75 w-full" 
         @row-click="handleRowClick"
     />
 

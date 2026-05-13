@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 import { FlexRender, type Table as TanstackTable} from '@tanstack/vue-table';
 import { useVirtualizer } from '@tanstack/vue-virtual';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@/components/ui/table';
+import NoResultsTableRow from './NoResultsTableRow.vue';
 
 interface Props {
     table: TanstackTable<TData>;
@@ -112,6 +113,8 @@ const handleRowClick = (row: TData | undefined): void => {
             :class="`overflow-auto`"
             :style="{height: `${height}px`}"
         >
+            <NoResultsTableRow v-if="rows.length === 0" />
+
             <Table class="w-max min-w-full">
                 <TableBody
                     class="relative block"
