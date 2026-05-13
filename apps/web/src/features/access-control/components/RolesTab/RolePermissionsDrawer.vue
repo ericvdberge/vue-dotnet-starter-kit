@@ -26,7 +26,7 @@ import { usePermissions } from '../../composables/usePermissions';
 interface RolePermissionsDrawerProps {
   open: boolean,
   role: Role | null,
-  permissionGroups: { [key: string]: Permission[] },
+  permissionGroups: { [key: string]: Permission[] } | undefined,
 }
 
 interface Emits {

@@ -10,7 +10,7 @@ import Input from '@/components/ui/input/Input.vue';
 import { ref } from 'vue';
 
 interface RoleFiltersProps {
-    roles: Role[],
+    roles: Role[] | undefined,
     table: ReturnType<typeof useRolesTable>['table'],
 }
 

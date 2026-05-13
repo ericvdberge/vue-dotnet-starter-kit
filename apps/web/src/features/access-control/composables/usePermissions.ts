@@ -5,12 +5,15 @@ import type { Permission } from "../types/permissions";
 
 export const usePermissions = (role: Ref<Role | null>) => {  
     const queryClient = useQueryClient();
-    const permissionsQuery = useQuery({
+
+    const getPermissions = () => {
+      return useQuery({
         queryKey: computed(() => ['permissions', role.value?.id]),
         queryFn: async () => {
             return buildPermissions(role.value?.id);
         }
-    })
+      })
+    }
 
     const togglePermission = useMutation({
         mutationFn: async ({ group, permissionId }: { permissionId: number, group: string }) => {
@@ -37,7 +40,7 @@ export const usePermissions = (role: Ref<Role | null>) => {
     })
 
     return {
-        permissionsQuery,
+        getPermissions,
         togglePermission
     }
 }

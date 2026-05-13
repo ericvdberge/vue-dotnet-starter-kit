@@ -2,14 +2,17 @@ import { useQuery } from "@tanstack/vue-query";
 import type { Role } from "../types/roles"
 
 export const useRoles = () => {
-    const rolesQuery = useQuery({
-        queryKey: ['roles'],
-        queryFn: async () => {
-            return await Promise.resolve(buildRoles());
-        }
-    })
+
+    const getRoles = () => {
+        return useQuery({
+            queryKey: ['roles'],
+            queryFn: async () => {
+                return await Promise.resolve(buildRoles());
+            }
+        })
+    }
     
-    return { rolesQuery };
+    return { getRoles };
 }
 
 function buildRoles(): Role[] {

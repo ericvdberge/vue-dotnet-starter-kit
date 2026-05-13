@@ -6,9 +6,9 @@ import {
 import type { Role } from "../types/roles"
 import { computed, unref, type Ref } from "vue"
 
-export const useRolesTable = (roles: Ref<Role[]>) => {
+export const useRolesTable = (roles: Ref<Role[] | undefined>) => {
     const columns = computed(() => {
-        if (!roles.value.length) return [];
+        if (!roles.value?.length) return [];
         return Object.keys(roles.value[0]!).map(key => ({
             accessorKey: key,
             header: key.charAt(0).toUpperCase() + key.slice(1)
@@ -17,7 +17,7 @@ export const useRolesTable = (roles: Ref<Role[]>) => {
 
     const table = useVueTable({
         get data() {
-            return unref(roles)
+            return unref(roles) ?? []
         },
         get columns() {
             return unref(columns);

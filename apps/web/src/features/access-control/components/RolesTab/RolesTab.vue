@@ -8,21 +8,30 @@ import { useRoles } from '../../composables/useRoles';
 import RoleFilters from './RoleFilters.vue';
 import VirtualTable from '@/components/VirtualTable.vue';
 
-const selectedRole = ref<Role | null>(null);
-const { permissionsQuery } = usePermissions(selectedRole);
-const permissionGroups = computed(() => permissionsQuery?.data.value || {});
-
-const { rolesQuery } = useRoles();
-const roles = computed(() => rolesQuery.data.value ?? []);
+/**
+ * Get the roles that are displayed in the virtual table
+ */
+const { getRoles } = useRoles();
+const { data: roles } = getRoles();
 const { table } = useRolesTable(roles);
+
+
+/**
+ * The permissions that are displayed in the drawer
+ * are fetched based on the selected role in the table. 
+ * When a row is clicked, the selected role is updated,
+ *  which triggers the permissions query to fetch the permissions 
+ * for that role and display them in the drawer.
+ */
+const selectedRole = ref<Role | null>(null);
 const openDrawer = ref(false);
+const { getPermissions } = usePermissions(selectedRole);
+const { data: permissionGroups } = getPermissions();
 
 const handleRowClick = (row: Role) => {
     selectedRole.value = row;
     openDrawer.value = !openDrawer.value;
 };
-
-
 </script>
 
 <template>
