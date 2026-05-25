@@ -8,32 +8,18 @@ const { getUsers } = useUsers();
 const { data: users, isFetching, fetchNextPage, fetchPreviousPage } = getUsers();
 const { table } = useUsersTable(users);
 
-onMounted(async () => {
-  // Load 2 pages for buffering
-  await fetchNextPage();
-  await fetchNextPage();
-})
-
-const handleReachEnd = async () => {
-    console.log('handleReachEnd: isFetching=', isFetching.value);
-    if (
-        isFetching.value
-    ) {
-        return;
+onMounted(() => {
+    if (!users.value) {
+        fetchNextPage();
     }
+});
 
-    await fetchNextPage();
+const handleReachEnd = () => {
+    fetchNextPage();
 }
 
-const handleReachStart = async () => {
-    console.log('handleReachStart: isFetching=', isFetching.value);
-    if (
-        isFetching.value
-    ) {
-        return;
-    }
-
-    await fetchPreviousPage();
+const handleReachStart = () => {
+    fetchPreviousPage();
 }
 </script>
 

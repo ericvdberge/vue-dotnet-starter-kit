@@ -1,19 +1,14 @@
+import { useInfiniteQuery } from "@tanstack/vue-query";
 import type { User } from "../types/users"
 import users from './users.json';
-import { useWindowedInfiniteQuery, type Page } from "@/composables/useWindowedInfiniteQuery";
-
-const PAGE_SIZE = 50
+import type { Page } from "../types/shared";
+const PAGE_SIZE = 100;
 
 const fetchUsers = async (
   cursor: string | null,
 ): Promise<Page<User>> => {
-    console.log('fetchUsers: cursor=', cursor);
-
-    await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
-
-  const start = cursor ? Number(cursor) : 1
-
-
+  await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
+  const start = cursor ? Number(cursor) : 0
   const items: User[] = users.sort((a, b) => a.id - b.id).slice(start, start + PAGE_SIZE) as User[];
 
   return Promise.resolve({
@@ -30,20 +25,14 @@ const fetchUsers = async (
   })
 }
 
-
 export const useUsers = () => {
-    // const usersQuery = useQuery({
-    //     queryKey: ['users'],
-    //     queryFn: async () => {
-    //         return await Promise.resolve(users);
-    //     }
-    // })
-
     const getUsers = () => {
-        return useWindowedInfiniteQuery({
-            queryKey: ['users'],
-            maxPages: 3,
-            queryFn: cursor => fetchUsers(cursor),
+        return useInfiniteQuery({
+          queryKey: ['users'],
+          initialPageParam: null,
+          queryFn: ({ pageParam }: { pageParam: string | null }) => fetchUsers(pageParam),
+          getNextPageParam: lastPage => lastPage.nextCursor,
+          getPreviousPageParam: firstPage => firstPage.prevCursor,
         })
     }
     

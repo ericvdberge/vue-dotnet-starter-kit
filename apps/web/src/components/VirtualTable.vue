@@ -74,7 +74,7 @@ onMounted(() => {
     const lastItem = virtualRows.value[virtualRows.value.length - 1]
     if (!lastItem) return
 
-    const buffer = 20
+    const buffer = 50
     const shouldLoadMore = lastItem.index >= rows.value.length - buffer
 
     const now = Date.now()
