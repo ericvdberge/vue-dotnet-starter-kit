@@ -13,8 +13,8 @@ public class UserEndpoints : IEndpoints
         group.MapGet("/", GetUsers);
     }
 
-    private Ok<UserViewModel[]> GetUsers()
+    private Ok<UserDto[]> GetUsers()
     {
-        return TypedResults.Ok<UserViewModel[]>([]);
+        return TypedResults.Ok<UserDto[]>([]);
     }
 }
