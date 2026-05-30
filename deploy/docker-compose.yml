@@ -9,13 +9,31 @@ services:
       - ../apps/web/.env.development
 
   api:
-    build: ../apps/api/WebGen.Api
+    build: ../apps/api
     ports:
       - "5001:8080"
     depends_on:
+      - postgress
       - keycloak
     env_file:
       - ../apps/api/WebGen.Api/.env.development
+
+  postgress:
+    image: pgvector/pgvector:pg18-trixie
+    container_name: postgress_vector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: webgen
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgress:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   
   keycloak:
     image: quay.io/keycloak/keycloak:latest
