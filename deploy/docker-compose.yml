@@ -20,7 +20,6 @@ services:
 
   postgress:
     image: pgvector/pgvector:pg18-trixie
-    container_name: postgress_vector
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
