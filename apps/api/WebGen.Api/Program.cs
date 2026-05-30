@@ -2,6 +2,7 @@ using Webgen.Infrastructure;
 using WebGen.Application;
 using WebGen.Api.Authentication;
 using WebGen.Api.Cors;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ app.UseCors(CorsExtensions.SECURE_CORS);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapOpenApi();
+app.MapScalarApiReference("/docs/");
 
 #if !DEBUG
 //app.UseHttpsRedirection();

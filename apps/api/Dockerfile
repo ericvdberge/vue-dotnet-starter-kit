@@ -13,8 +13,9 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY . .
-RUN dotnet restore "WebGen.Api/WebGen.Api.csproj"
-RUN dotnet build "WebGen.Api/WebGen.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+# Restore and build the solution to ensure all project references are available
+RUN dotnet restore "WebGen.Api.slnx"
+RUN dotnet build "WebGen.Api.slnx" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish

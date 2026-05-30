@@ -3,7 +3,7 @@ using WebGen.Domain.Entities;
 
 namespace Webgen.Infrastructure;
 
-public class AppDbContext: DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
 
     /// <summary>

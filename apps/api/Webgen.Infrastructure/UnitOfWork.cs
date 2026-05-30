@@ -5,7 +5,7 @@ public interface IUnitOfWork : IDisposable
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
 
-public class UnitOfWork(AppDbContext _context) : IUnitOfWork
+public sealed class UnitOfWork(AppDbContext _context) : IUnitOfWork
 {
     public void Dispose()
         => _context.Dispose();
