@@ -3,6 +3,7 @@ using WebGen.Application;
 using WebGen.Api.Authentication;
 using WebGen.Api.Cors;
 using Scalar.AspNetCore;
+using WebGen.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services
 /// App Services after authentication
 /// </summary>
 builder.Services
+    .AddApi()
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
 
@@ -35,6 +37,7 @@ app.MapScalarApiReference("/docs/");
 
 // Public endpoint
 app.MapGet("/", () => "API running");
+app.MapApi();
 
 string[] _keys = ["Key1", "Key2", "Key3"];
 app.MapGet("/secure", () => TypedResults.Ok(_keys))
