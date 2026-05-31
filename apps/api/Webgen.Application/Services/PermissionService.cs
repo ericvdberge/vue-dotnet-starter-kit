@@ -15,7 +15,7 @@ public class PermissionService(
 {
     public async Task AssignUserRole(Guid userId, Guid roleId)
     {
-        var user = new User { Email = "", Id = userId }; //get from context
+        var user = new User { Name = "", Email = "", Id = userId }; //get from context
 
         user.AssignRole(roleId);
         await _unitOfWork.SaveChangesAsync();

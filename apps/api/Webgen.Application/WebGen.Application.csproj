@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Api" Version="1.15.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WebGen.Domain\WebGen.Domain.csproj" />
     <ProjectReference Include="..\Webgen.Infrastructure\WebGen.Infrastructure.csproj" />
   </ItemGroup>

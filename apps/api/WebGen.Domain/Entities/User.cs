@@ -2,10 +2,11 @@
 
 public record User
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.CreateVersion7();
+    public required string Name { get; set; }
     public required string Email { get; set; }
 
-    public ICollection<UserRole> UserRoles { get; set; } = [];
+    //public ICollection<UserRole> UserRoles { get; set; } = [];
 
     public void AssignRole(Guid roleId)
     {
@@ -15,6 +16,6 @@ public record User
             RoleId = roleId
         };
 
-        UserRoles.Add(userRole);
+        //UserRoles.Add(userRole);
     }
 }

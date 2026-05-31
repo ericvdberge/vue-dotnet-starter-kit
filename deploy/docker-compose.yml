@@ -13,12 +13,12 @@ services:
     ports:
       - "5001:8080"
     depends_on:
-      - postgress
+      - postgres
       - keycloak
     env_file:
       - ../apps/api/WebGen.Api/.env.development
 
-  postgress:
+  postgres:
     image: pgvector/pgvector:pg18-trixie
     environment:
       POSTGRES_USER: postgres
@@ -27,7 +27,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgress:/docker-entrypoint-initdb.d
+      - ./postgres:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
