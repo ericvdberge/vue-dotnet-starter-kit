@@ -1,4 +1,5 @@
 ﻿using WebGen.Api.Abstractions;
+using WebGen.Api.Mappers;
 
 namespace WebGen.Api;
 
@@ -6,6 +7,7 @@ public static class ApiServiceExtension
 {
     public static IServiceCollection AddApi(this IServiceCollection services)
     {
+        // All endpoints
         services.Scan(scan =>
             scan
                 .FromApplicationDependencies()
@@ -13,6 +15,10 @@ public static class ApiServiceExtension
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
         );
+
+        // normal DI
+        services.AddSingleton<IUserMapper, UserMapper>();
+
         return services;
     }
 

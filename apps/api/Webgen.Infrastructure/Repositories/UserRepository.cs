@@ -6,19 +6,25 @@ namespace WebGen.Infrastructure.Repositories;
 
 public interface IUserRepository
 {
-    public Task<UserDao[]> GetUsersAsync();
+    public Task<UserDao[]> GetUsersAsync(Guid? lastId, int? limit);
 }
 
 public class UserRepository(AppDbContext context) : IUserRepository
 {
-    public async Task<UserDao[]> GetUsersAsync()
+    private const int DEFAULT_PAGE_SIZE = 100;
+    public async Task<UserDao[]> GetUsersAsync(Guid? lastId, int? limit)
     {
-        var users = await context.Users
-            .Select(r => new UserDao //todo: use mapper of mapperly
-            {
-                Name = r.Name,
-                Email = r.Email
-            })
+        var query = context.Users
+            .AsQueryable();
+
+        if(lastId.HasValue)
+        {
+            query = query.Where(q => q.Id > lastId.Value);
+        }
+
+        var users = await query
+            .OrderBy(q => q.Id)
+            .Take(limit ?? DEFAULT_PAGE_SIZE)
             .ToArrayAsync();
 
         return users;
