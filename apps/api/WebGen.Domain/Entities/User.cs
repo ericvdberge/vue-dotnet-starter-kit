@@ -5,6 +5,7 @@ public record User
     public Guid Id { get; set; } = Guid.CreateVersion7();
     public required string Name { get; set; }
     public required string Email { get; set; }
+    public bool Active { get; set; } = false;
 
     //public ICollection<UserRole> UserRoles { get; set; } = [];
 

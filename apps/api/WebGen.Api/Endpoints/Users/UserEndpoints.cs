@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebGen.Api.Abstractions;
 using WebGen.Api.Mappers;
 using WebGen.Application.Services;
@@ -25,10 +24,12 @@ public class UserEndpoints(
     /// <param name="lastId">the Id of the last user that you have fetched</param>
     /// <param name="limit">the amount of items you want to fetch at the same time. 100 = default</param>
     /// <returns></returns>
-    private async Task<Ok<UserDto[]>> GetUsersAsync([FromQuery] Guid? lastId, [FromQuery]int? limit)
+    private async Task<IResult> GetUsersAsync(
+        [FromQuery] Guid? lastId, 
+        [FromQuery]int? limit)
     {
         var users = await userService.GetUsersAsync(lastId, limit);
-        var userDtos = users.Select(userMapper.ToDto).ToArray();
-        return TypedResults.Ok(userDtos);
+        var userDtos = users.Select(userMapper.ToDto);
+        return TypedResults.Ok<UserDto[]>([..userDtos]);
     }
 }

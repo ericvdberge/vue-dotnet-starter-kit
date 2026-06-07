@@ -1,6 +1,6 @@
 ﻿using WebGen.Application.Mappers;
 using WebGen.Domain.Entities;
-using WebGen.Infrastructure.Repositories;
+using WebGen.Infrastructure.Repositories.Users;
 
 namespace WebGen.Application.Services;
 
