@@ -9,6 +9,11 @@ CREATE TABLE users (
     active BOOLEAN DEFAULT TRUE
 );
 
+CREATE TABLE roles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL UNIQUE
+);
+
 INSERT INTO users (
     id,
     name,
@@ -23,3 +28,11 @@ SELECT
     NOW() - (random() * INTERVAL '365 days'),
     random() > 0.1
 FROM generate_series(1, 6000) AS gs;
+
+INSERT INTO roles (name)
+VALUES 
+    ('Admin'),
+    ('Editor'),
+    ('Viewer'),
+    ('Manager'),
+    ('Guest');

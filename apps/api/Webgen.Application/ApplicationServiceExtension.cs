@@ -12,6 +12,8 @@ public static class ApplicationServiceExtension
         services
             .AddScoped<IUserService, UserService>()
             .AddScoped<IUserMapper, UserMapper>()
+            .AddScoped<IRoleService, RoleService>()
+            .AddScoped<IRoleMapper, RoleMapper>()
             .AddScoped<IPermissionService, PermissionService>();
 
         return services;

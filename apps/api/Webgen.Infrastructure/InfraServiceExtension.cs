@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebGen.Infrastructure.Repositories.Roles;
 using WebGen.Infrastructure.Repositories.Users;
 
 namespace Webgen.Infrastructure;
@@ -19,7 +20,8 @@ public static class InfraServiceExtension
             .AddScoped<IUnitOfWork, UnitOfWork>();
 
         services
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IRolesRepository, RolesRepository>();
 
         return services;
     }

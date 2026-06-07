@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Webgen.Infrastructure\WebGen.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Endpoints\Me\" />
+  </ItemGroup>
+
 </Project>
