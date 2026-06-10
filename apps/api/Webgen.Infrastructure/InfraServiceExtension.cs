@@ -21,7 +21,7 @@ public static class InfraServiceExtension
 
         services
             .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IRolesRepository, RolesRepository>();
+            .AddScoped<IRoleRepository, RoleRepository>();
 
         return services;
     }

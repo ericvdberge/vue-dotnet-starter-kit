@@ -15,7 +15,7 @@ WORKDIR /src
 COPY . .
 # Restore and build the solution to ensure all project references are available
 RUN dotnet restore "WebGen.Api.slnx"
-RUN dotnet build "WebGen.Api.slnx" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "WebGen.Api.slnx" -c $BUILD_CONFIGURATION
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish

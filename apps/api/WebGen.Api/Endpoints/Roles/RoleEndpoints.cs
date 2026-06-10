@@ -6,7 +6,8 @@ namespace WebGen.Api.Endpoints.Roles;
 
 public class RoleEndpoints(
     IRoleService roleService,
-    IRoleMapper mapper) : IEndpoints
+    IRoleMapper roleMapper,
+    IPermissionMapper permissionMapper) : IEndpoints
 {
     public void MapEndpoints(IEndpointRouteBuilder app)
     {
@@ -15,11 +16,18 @@ public class RoleEndpoints(
             .WithTags("Roles");
 
         group.MapGet("/", GetAllRolesAsync);
+        group.MapGet("/{roleId:guid}/permissions", GetRolePermissionsAsync);
     }
 
     private async Task<IResult> GetAllRolesAsync()
     {
         var roles = await roleService.GetRolesAsync();
-        return TypedResults.Ok<RoleDto[]>([..roles.Select(mapper.ToDto)]);
+        return Results.Ok<RoleDto[]>([..roles.Select(roleMapper.ToDto)]);
+    }
+
+    private async Task<IResult> GetRolePermissionsAsync(Guid roleId)
+    {
+        var permissions = await roleService.GetRolePermissionsAsync(roleId);
+        return Results.Ok<PermissionDto[]>([..permissions.Select(permissionMapper.ToDto)]);
     }
 }

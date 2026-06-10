@@ -4,6 +4,6 @@ public record RoleDto
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }
-    //public required PermissionDto[] Permissions { get; set; }
+    public PermissionDto[]? Permissions { get; set; } = null;
 
 }

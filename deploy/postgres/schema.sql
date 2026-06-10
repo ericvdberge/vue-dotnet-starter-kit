@@ -8,11 +8,22 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 );
+GO;
 
 CREATE TABLE roles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL UNIQUE
 );
+GO;
+
+CREATE TABLE permissions(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    role_id UUID REFERENCES roles(id) ON DELETE CASCADE,
+    source TEXT NOT NULL,
+    action TEXT NOT NULL,
+    UNIQUE(role_id, source, action)
+);
+GO;
 
 INSERT INTO users (
     id,
@@ -28,6 +39,7 @@ SELECT
     NOW() - (random() * INTERVAL '365 days'),
     random() > 0.1
 FROM generate_series(1, 6000) AS gs;
+GO;
 
 INSERT INTO roles (name)
 VALUES 
@@ -36,3 +48,24 @@ VALUES
     ('Viewer'),
     ('Manager'),
     ('Guest');
+
+GO;
+
+INSERT INTO permissions (role_id, source, action)
+values 
+    ((SELECT id FROM roles WHERE name = 'Admin'), 'documents', 'read'),
+    ((SELECT id FROM roles WHERE name = 'Admin'), 'documents', 'write'),
+    ((SELECT id FROM roles WHERE name = 'Admin'), 'users', 'read'),
+    ((SELECT id FROM roles WHERE name = 'Admin'), 'users', 'write'),
+
+    ((SELECT id FROM roles WHERE name = 'Editor'), 'documents', 'read'),
+    ((SELECT id FROM roles WHERE name = 'Editor'), 'documents', 'write'),
+    
+    ((SELECT id FROM roles WHERE name = 'Viewer'), 'documents', 'read'),
+    
+    ((SELECT id FROM roles WHERE name = 'Manager'), 'documents', 'read'),
+    ((SELECT id FROM roles WHERE name = 'Manager'), 'documents', 'write'),
+    
+    ((SELECT id FROM roles WHERE name = 'Guest'), 'documents', 'read');
+
+GO;

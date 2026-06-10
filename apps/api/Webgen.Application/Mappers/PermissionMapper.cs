@@ -4,16 +4,14 @@ using WebGen.Infrastructure.Dao;
 
 namespace WebGen.Application.Mappers;
 
-public interface IRoleMapper
+public interface IPermissionMapper
 {
-    Role ToRole(RoleDao roleDao);
+    Permission ToPermission(PermissionDao permissionDao);
 }
 
 [Mapper]
-public sealed partial class RoleMapper : IRoleMapper
+public partial class PermissionMapper : IPermissionMapper
 {
-    public partial Role ToRole(RoleDao roleDao);
-
     [MapperIgnoreSource(nameof(PermissionDao.RoleId))]
     public partial Permission ToPermission(PermissionDao permissionDao);
 }

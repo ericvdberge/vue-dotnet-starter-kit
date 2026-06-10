@@ -1,11 +1,10 @@
 ﻿namespace WebGen.Domain.Entities;
 
-public record Role
+public class Role
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }
 
-    //public ICollection<RolePermission> RolePermissions { get; set; } = [];
-    //public ICollection<UserRole> UserRoles { get; set; } = [];
+    public Permission[]? Permissions { get; set; } = null;
 
 }

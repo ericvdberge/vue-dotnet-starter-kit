@@ -3,10 +3,7 @@
 public class Permission
 {
     public Guid Id { get; set; }
+    public string Source { get; set; } = string.Empty;
+    public string Action { get; set; } = string.Empty;
 
-    public required string Action { get; set; }
-
-    public required string Resource { get; set; }
-
-    public ICollection<RolePermission> RolePermissions { get; set; } = [];
 }

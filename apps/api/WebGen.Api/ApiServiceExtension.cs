@@ -19,7 +19,8 @@ public static class ApiServiceExtension
         // normal DI
         services
             .AddSingleton<IUserMapper, UserMapper>()
-            .AddSingleton<IRoleMapper, RoleMapper>();
+            .AddSingleton<IRoleMapper, RoleMapper>()
+            .AddSingleton<IPermissionMapper, PermissionMapper>();
 
         return services;
     }
