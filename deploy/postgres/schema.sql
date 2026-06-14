@@ -8,13 +8,11 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     active BOOLEAN DEFAULT TRUE
 );
-GO;
 
 CREATE TABLE roles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL UNIQUE
 );
-GO;
 
 CREATE TABLE permissions(
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -23,7 +21,6 @@ CREATE TABLE permissions(
     action TEXT NOT NULL,
     UNIQUE(role_id, source, action)
 );
-GO;
 
 INSERT INTO users (
     id,
@@ -39,7 +36,6 @@ SELECT
     NOW() - (random() * INTERVAL '365 days'),
     random() > 0.1
 FROM generate_series(1, 6000) AS gs;
-GO;
 
 INSERT INTO roles (name)
 VALUES 
@@ -49,7 +45,6 @@ VALUES
     ('Manager'),
     ('Guest');
 
-GO;
 
 INSERT INTO permissions (role_id, source, action)
 values 
@@ -67,5 +62,3 @@ values
     ((SELECT id FROM roles WHERE name = 'Manager'), 'documents', 'write'),
     
     ((SELECT id FROM roles WHERE name = 'Guest'), 'documents', 'read');
-
-GO;
