@@ -1,5 +1,4 @@
-# 🚀 Vue + shadcn + .NET 10 + Keycloak Starter Kit
-
+![test](./Banner.png)
 A modern full‑stack monorepo template combining:
 
 -   **Vue 3 frontend**
